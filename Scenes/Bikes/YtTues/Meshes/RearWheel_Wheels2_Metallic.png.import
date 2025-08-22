@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://70o0y12la4js"
+path.s3tc="res://.godot/imported/RearWheel_Wheels2_Metallic.png-a0793b82e94ad37065d28e97f273ac4a.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "11dbe3e539b913b70da3b2f797113f71"
+}
+
+[deps]
+
+source_file="res://Scenes/Bikes/YtTues/Meshes/RearWheel_Wheels2_Metallic.png"
+dest_files=["res://.godot/imported/RearWheel_Wheels2_Metallic.png-a0793b82e94ad37065d28e97f273ac4a.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6oca0786u8bj"]
+
+[ext_resource type="Script" uid="uid://cbvqbxt6wocea" path="res://Scenes/Bikes/BikeBase/Scripts/bike_wheel_base.gd" id="1_omc1g"]
+
+[node name="BikeWheelBase" type="RayCast3D"]
+script = ExtResource("1_omc1g")
