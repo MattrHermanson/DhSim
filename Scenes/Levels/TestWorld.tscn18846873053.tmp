@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://5f0lanmrvn7r"]
+
+[ext_resource type="Texture2D" uid="uid://6rm8jcvrb02p" path="res://Assets/citrus_orchard_puresky_4k.exr" id="1_sr1yi"]
+[ext_resource type="PackedScene" uid="uid://ejvh17vkkqr8" path="res://Scenes/Bikes/YtTues/YtTues.tscn" id="2_sr1yi"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_w6hgi"]
+panorama = ExtResource("1_sr1yi")
+energy_multiplier = 0.75
+
+[sub_resource type="Sky" id="Sky_sr1yi"]
+sky_material = SubResource("PanoramaSkyMaterial_w6hgi")
+
+[sub_resource type="Environment" id="Environment_w6hgi"]
+background_mode = 2
+background_color = Color(0.743998, 0.839718, 0.968982, 1)
+sky = SubResource("Sky_sr1yi")
+tonemap_mode = 2
+ssao_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nu7tq"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.419813, 0.419813, 0.419813, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w6hgi")
+
+[node name="CSGTerrain" type="CSGBox3D" parent="."]
+transform = Transform3D(53.9221, 0, 0, 0, 0.247797, 0, 0, 0, 139.035, -0.024147, 0.0233753, -0.0136616)
+use_collision = true
+material = SubResource("StandardMaterial3D_nu7tq")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGTerrain"]
+transform = Transform3D(0.0185453, 0, 0, 0, 4.03555, 0, 0, 0, 0.0486109, -0.484618, 3.00922, 0.0776424)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGTerrain"]
+transform = Transform3D(0.0185453, 0, 0, 0, 4.03555, 0, 0, 0, 0.0486109, -0.484618, 3.00922, 0.216876)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGTerrain"]
+transform = Transform3D(0.0185453, 0, 0, 0, 4.03555, 0, 0, 0, 0.0486109, -0.484618, 3.00922, 0.361569)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGTerrain"]
+transform = Transform3D(0.0185453, 0, 0, 0, 4.03555, 0, 0, 0, 0.0486109, -0.484618, 3.00922, -0.32918)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGTerrain"]
+transform = Transform3D(0.0185453, 0, 0, 0, 4.03555, 0, 0, 0, 0.0486109, -0.484618, 3.00922, -0.189946)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGTerrain"]
+transform = Transform3D(0.0185453, 0, 0, 0, 4.03555, 0, 0, 0, 0.0486109, -0.484618, 3.00922, -0.0452533)
+
+[node name="YtTues" parent="." instance=ExtResource("2_sr1yi")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0389614, 0.830137, 0.909859)
+axis_lock_angular_y = true
+axis_lock_angular_z = true

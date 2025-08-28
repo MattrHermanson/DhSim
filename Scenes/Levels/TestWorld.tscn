@@ -1,16 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://5f0lanmrvn7r"]
+[gd_scene load_steps=8 format=3 uid="uid://5f0lanmrvn7r"]
 
+[ext_resource type="Texture2D" uid="uid://6rm8jcvrb02p" path="res://Assets/citrus_orchard_puresky_4k.exr" id="1_sr1yi"]
 [ext_resource type="PackedScene" uid="uid://ejvh17vkkqr8" path="res://Scenes/Bikes/YtTues/YtTues.tscn" id="2_sr1yi"]
+[ext_resource type="Texture2D" uid="uid://cqi46pil1b70d" path="res://addons/kenney_prototype_textures/dark/texture_07.png" id="2_w6hgi"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_w6hgi"]
+panorama = ExtResource("1_sr1yi")
+energy_multiplier = 0.75
+
+[sub_resource type="Sky" id="Sky_sr1yi"]
+sky_material = SubResource("PanoramaSkyMaterial_w6hgi")
+
+[sub_resource type="Environment" id="Environment_w6hgi"]
+background_mode = 2
+background_color = Color(0.743998, 0.839718, 0.968982, 1)
+sky = SubResource("Sky_sr1yi")
+tonemap_mode = 2
+ssao_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nu7tq"]
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.419813, 0.419813, 0.419813, 1)
+albedo_texture = ExtResource("2_w6hgi")
+uv1_scale = Vector3(-10, -10, -10)
+uv1_triplanar = true
+uv2_scale = Vector3(-10, -10, -10)
+uv2_triplanar = true
 
 [node name="Node3D" type="Node3D"]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.71694, 0.561769, -0.412811, 0.000327655, 0.591882, 0.806024, 0.697135, -0.578007, 0.42416, 0, 0, 0)
-light_energy = 1.945
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w6hgi")
 
 [node name="CSGTerrain" type="CSGBox3D" parent="."]
 transform = Transform3D(53.9221, 0, 0, 0, 0.247797, 0, 0, 0, 139.035, -0.024147, 0.0233753, -0.0136616)
@@ -36,6 +56,4 @@ transform = Transform3D(0.0185453, 0, 0, 0, 4.03555, 0, 0, 0, 0.0486109, -0.4846
 transform = Transform3D(0.0185453, 0, 0, 0, 4.03555, 0, 0, 0, 0.0486109, -0.484618, 3.00922, -0.0452533)
 
 [node name="YtTues" parent="." instance=ExtResource("2_sr1yi")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0404344, 0.681828, 0.908956)
-axis_lock_angular_y = true
-axis_lock_angular_z = true
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0389614, 0.830137, 0.909859)

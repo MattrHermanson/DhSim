@@ -53,7 +53,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_2d536")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_np068"]
-size = Vector3(0.222107, 0.665161, 1)
+size = Vector3(0.186325, 0.665161, 1)
 
 [node name="YtTues" type="RigidBody3D" node_paths=PackedStringArray("front_wheel", "rear_wheel")]
 mass = 18.0
@@ -73,24 +73,24 @@ mesh = ExtResource("3_3qdx3")
 transform = Transform3D(0.35, 0, 0, 0, 0.334562, -0.102803, 0, 0.102803, 0.334562, -0.00294569, 0.303414, 0.107273)
 mesh = SubResource("ArrayMesh_1i1oi")
 
+[node name="pedals" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0621122, -0.200741, 0.234463)
+mesh = ExtResource("7_0bcar")
+
 [node name="handlebars" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0.259089, 0.965854, 1.13251e-08, -0.965854, 0.259089, -4.22188e-08, 0.0229423, 0.524688, -0.440251)
+transform = Transform3D(-4.37114e-08, -1.77636e-15, 1, 0.259089, 0.965854, 1.13251e-08, -0.965854, 0.259089, -4.22188e-08, 0.0229423, 0.524688, -0.440251)
 mesh = ExtResource("5_hkuws")
 
 [node name="fork" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0.464409, 0.885621, 2.03e-08, -0.885621, 0.464409, -3.87117e-08, -0.00442466, 0.233387, -0.591368)
 mesh = ExtResource("6_sr646")
 
-[node name="pedals" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0621122, -0.200741, 0.234463)
-mesh = ExtResource("7_0bcar")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000723541, 0.124232, -0.0122006)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00221128, 0.124232, -0.0122006)
 shape = SubResource("BoxShape3D_np068")
 
 [node name="FrontWheel" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.151729, -0.827873)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00159907, -0.152994, -0.827043)
 target_position = Vector3(0, -0.4, 0)
 script = ExtResource("7_3qdx3")
 spring_strength = 6000.0
@@ -103,7 +103,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.0
 mesh = ExtResource("8_ljddd")
 
 [node name="RearWheel" type="RayCast3D" parent="."]
-transform = Transform3D(1, -0.000388867, -0.000301888, 0.000388446, 0.999999, -0.00136247, 0.000302429, 0.00136235, 0.999999, 0, -0.152, 0.459699)
+transform = Transform3D(1, -0.000388867, -0.000301888, 0.000388446, 0.999999, -0.00136247, 0.000302429, 0.00136235, 0.999999, 0, -0.153, 0.457)
 target_position = Vector3(0, -0.4, 0)
 script = ExtResource("7_3qdx3")
 spring_strength = 6000.0
@@ -113,9 +113,9 @@ wheel_type = 1
 metadata/_custom_type_script = "uid://cbvqbxt6wocea"
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="RearWheel"]
-transform = Transform3D(-1, -2.55795e-11, -8.73988e-08, -1.79909e-11, 1, 0, 8.74279e-08, 0, -1, -0.0186839, -0.00202654, -0.0013859)
+transform = Transform3D(-1, -5.36033e-11, -8.73697e-08, -4.75211e-11, 1, 0, 8.74279e-08, 0, -1, 0, 0, 0)
 mesh = ExtResource("9_ljddd")
 skeleton = NodePath("../../FrontWheel")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.84206, 0.0941364, -0.309227)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.541849, 1.825)
