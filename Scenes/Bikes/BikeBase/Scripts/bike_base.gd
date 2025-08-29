@@ -83,7 +83,7 @@ func interpolate_steering(steering_input: float, delta: float) -> float:
 	var lean_torque := p_term + d_term
 	last_error = error
 	
-	print("lean t ", lean_torque, " p_term ", p_term, " d_term ", d_term)
+	#print("lean t ", lean_torque, " p_term ", p_term, " d_term ", d_term)
 	
 	apply_torque(Vector3(0, 0, lean_torque))
 	
