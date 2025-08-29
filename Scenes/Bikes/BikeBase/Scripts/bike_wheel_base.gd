@@ -6,21 +6,22 @@ enum WheelType {
 	REAR,
 }
 
-# Wheel Settings - TODO make conditional http://kehomsforge.com/tutorials/single/conditionally-export-properties-godot/
-@export var spring_strength := 100.0
-@export var spring_damping := 2.0
-@export var wheel_radius := 0.4
-@export var pedal_force := 200
-@export var brake_force := 500
-@export var head_tube_angle := 63.5
-@export var max_steering_angle := 45.0
-@export var wheel_type : WheelType
+# Wheel Settings
+var spring_strength : float
+var spring_damping : float
+var wheel_radius : float
+var pedal_force : float
+var brake_force : float
+var head_tube_angle : float
+var max_steering_angle : float
+var wheel_type : WheelType
 @onready var wheel: Node3D = get_child(0) # reference to wheel mesh
 
 # Internal Variables
 var current_steering_angle := 0.0
 var steering_axis : Vector3
 var is_sliding := false
+var is_setup := false
 
 func _ready() -> void:
 	if not target_position.y == -(wheel_radius + 0.05):
@@ -28,8 +29,24 @@ func _ready() -> void:
 	
 	set_steering_axis(deg_to_rad(head_tube_angle))
 
+
+func setup_wheel(settings_dict: Dictionary) -> void:
+	spring_strength = settings_dict["spring_strength"]
+	spring_damping = settings_dict["spring_damping"]
+	wheel_radius = settings_dict["wheel_radius"]
+	pedal_force = settings_dict["pedal_force"]
+	brake_force = settings_dict["brake_force"]
+	head_tube_angle = settings_dict["head_tube_angle"]
+	max_steering_angle = settings_dict["max_steering_angle"]
+	wheel_type = settings_dict["wheel_type"]
+	is_setup = true
+
+
 # Returns all forces that are generated from the wheel
 func get_forces(pedal_input: float, steering_input: float, front_brake_input: float, rear_brake_input: float, velocity: Vector3) -> Vector3:
+	if not is_setup:
+		push_error("Wheel is not setup")
+	
 	var total_force_vector: Vector3
 	var longitudinal_force_vector: Vector3
 	var lateral_force_vector: Vector3

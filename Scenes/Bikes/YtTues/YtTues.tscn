@@ -93,9 +93,6 @@ shape = SubResource("BoxShape3D_np068")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00159907, -0.152994, -0.827043)
 target_position = Vector3(0, -0.4, 0)
 script = ExtResource("7_3qdx3")
-spring_strength = 6000.0
-spring_damping = 350.0
-wheel_radius = 0.36
 metadata/_custom_type_script = "uid://cbvqbxt6wocea"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FrontWheel"]
@@ -106,10 +103,6 @@ mesh = ExtResource("8_ljddd")
 transform = Transform3D(1, -0.000388867, -0.000301888, 0.000388446, 0.999999, -0.00136247, 0.000302429, 0.00136235, 0.999999, 0, -0.153, 0.457)
 target_position = Vector3(0, -0.4, 0)
 script = ExtResource("7_3qdx3")
-spring_strength = 6000.0
-spring_damping = 350.0
-wheel_radius = 0.36
-wheel_type = 1
 metadata/_custom_type_script = "uid://cbvqbxt6wocea"
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="RearWheel"]
@@ -118,4 +111,5 @@ mesh = ExtResource("9_ljddd")
 skeleton = NodePath("../../FrontWheel")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.541849, 1.825)
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.552, 1.335)
+fov = 90.0

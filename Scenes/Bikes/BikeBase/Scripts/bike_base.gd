@@ -1,8 +1,54 @@
 extends RigidBody3D
 class_name BikeBase
 
+enum WheelType {
+	FRONT,
+	REAR,
+}
+
+#region Wheel Settings and Settings Dictionaries
+@export_category("Front Wheel")
 @export var front_wheel : BikeWheelBase
+@export_group("Front Wheel Settings")
+@export var f_spring_strength := 6000.0
+@export var f_spring_damping := 350.0
+@export var f_wheel_radius := 0.36
+@export var f_brake_force := 500.0
+@export var f_head_tube_angle := 63.5
+@export var f_max_steering_angle := 45.0
+
+@onready var f_settings_dict = {
+	"spring_strength" : f_spring_strength,
+	"spring_damping" : f_spring_damping,
+	"wheel_radius" : f_wheel_radius,
+	"pedal_force" : 0.0,
+	"brake_force" : f_brake_force,
+	"head_tube_angle" : f_head_tube_angle,
+	"max_steering_angle" : f_max_steering_angle,
+	"wheel_type" : WheelType.FRONT,
+}
+
+@export_category("Rear Wheel")
 @export var rear_wheel : BikeWheelBase
+@export_group("Rear Wheel Settings")
+@export var r_spring_strength := 6000.0
+@export var r_spring_damping := 350.0
+@export var r_wheel_radius := 0.36
+@export var r_pedal_force := 200.0
+@export var r_brake_force := 500.0
+
+@onready var r_settings_dict = {
+	"spring_strength" : r_spring_strength,
+	"spring_damping" : r_spring_damping,
+	"wheel_radius" : r_wheel_radius,
+	"pedal_force" : r_pedal_force,
+	"brake_force" : r_brake_force,
+	"head_tube_angle" : 0.0,
+	"max_steering_angle" : 0.0,
+	"wheel_type" : WheelType.REAR,
+}
+#endregion
+
 var wheels: Array[BikeWheelBase]
 
 var pedal_input := 0.0
@@ -10,11 +56,14 @@ var steering_input := 0.0
 var front_brake_input := 0.0
 var rear_brake_input := 0.0
 
+
 func _ready() -> void:
 		assert(front_wheel != null, "ERROR: 'front_wheel' must not be null!")
 		assert(rear_wheel != null, "ERROR: 'rear_wheel' must not be null!")
 		
 		wheels = [front_wheel, rear_wheel]
+		wheels[0].setup_wheel(f_settings_dict)
+		wheels[1].setup_wheel(r_settings_dict)
 
 
 func _process(delta: float) -> void:
