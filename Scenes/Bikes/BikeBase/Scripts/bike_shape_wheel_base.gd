@@ -1,5 +1,5 @@
-extends RayCast3D
-class_name BikeWheelBase
+extends ShapeCast3D
+class_name BikeShapeWheelBase
 
 enum WheelType {
 	FRONT,
@@ -24,8 +24,8 @@ var is_sliding := false
 var is_setup := false
 
 func _ready() -> void:
-	if not target_position.y == -(wheel_radius + 0.05):
-		push_warning("Target position not set correctly and won't reflect actual raycast")
+	# set target position
+	target_position = Vector3.ZERO
 
 
 func setup_wheel(settings_dict: Dictionary) -> void:
@@ -38,11 +38,18 @@ func setup_wheel(settings_dict: Dictionary) -> void:
 	max_steering_angle = settings_dict["max_steering_angle"]
 	wheel_type = settings_dict["wheel_type"]
 	set_steering_axis(deg_to_rad(head_tube_angle))
+	
+	# set shape
+	var sphere = SphereShape3D.new()
+	sphere.radius = wheel_radius
+	sphere.margin = 0.04 # meters
+	set_shape(sphere)
+	
 	is_setup = true
 
 
 # Returns all forces that are generated from the wheel
-func get_forces(pedal_input: float, steering_input: float, front_brake_input: float, rear_brake_input: float, velocity: Vector3) -> Vector3:
+func get_forces(closest_collision_index: int, pedal_input: float, steering_input: float, front_brake_input: float, rear_brake_input: float, velocity: Vector3) -> Vector3:
 	if not is_setup:
 		push_error("Wheel is not setup")
 	
@@ -55,20 +62,20 @@ func get_forces(pedal_input: float, steering_input: float, front_brake_input: fl
 	var kinetic_friction = 0.7
 	
 	# Add all wheel forces
-	total_force_vector += get_normal_force(velocity)
+	total_force_vector += get_normal_force(closest_collision_index, velocity)
 	
 	# Add rear-only forces
 	if wheel_type == WheelType.REAR:
 		update_animation(velocity, 0.0)
-		longitudinal_force_vector += get_pedal_force(pedal_input)
-		longitudinal_force_vector += get_brake_force(rear_brake_input, velocity)
-		lateral_force_vector += get_steering_force(velocity)
+		longitudinal_force_vector += get_pedal_force(closest_collision_index, pedal_input)
+		longitudinal_force_vector += get_brake_force(closest_collision_index, rear_brake_input, velocity)
+		lateral_force_vector += get_steering_force(closest_collision_index, velocity)
 	
 	# Add front-only forces
 	if wheel_type == WheelType.FRONT:
 		update_animation(velocity, steering_input)
-		longitudinal_force_vector += get_brake_force(front_brake_input, velocity)
-		lateral_force_vector += get_steering_force(velocity)
+		longitudinal_force_vector += get_brake_force(closest_collision_index, front_brake_input, velocity)
+		lateral_force_vector += get_steering_force(closest_collision_index, velocity)
 	
 	#limit total force
 	total_force_vector += apply_friction_circle(longitudinal_force_vector, lateral_force_vector, total_force_vector.length(), static_friction, kinetic_friction)
@@ -93,29 +100,28 @@ func update_animation(velocity: Vector3, steering_input: float) -> void:
 	rotate_y(deg_to_rad(-degrees_to_rotate))
 
 
-func get_normal_force(velocity: Vector3) -> Vector3:
-	target_position.y = -(wheel_radius + 0.05) # wheel_radius + magic offset, maybe remove
-	var contact := get_collision_point()
+func get_normal_force(collision_index: int, velocity: Vector3) -> Vector3:
+	var contact := get_collision_point(collision_index)
 	var spring_up_direction := global_basis.y
 	var penetration := wheel_radius - global_position.distance_to(contact)
 	var spring_force := spring_strength * penetration
 	var relative_vel := spring_up_direction.dot(velocity)
 	var spring_damp_force := spring_damping * relative_vel
-	var force_vector := (spring_force - spring_damp_force) * get_collision_normal()
+	var force_vector := (spring_force - spring_damp_force) * get_collision_normal(collision_index)
 	return force_vector
 
 
-func get_pedal_force(pedal_input: float) -> Vector3:
+func get_pedal_force(collision_index: int, pedal_input: float) -> Vector3:
 	if pedal_input > 0.0:
 		var foward_direction := -global_basis.z
-		var contact := get_collision_point()
+		var contact := get_collision_point(collision_index)
 		var force_vector := foward_direction * pedal_force * pedal_input
 		return force_vector
 	else: return Vector3(0, 0, 0)
 
 
 # Works now, might be a problem later with all the easing to a stop
-func get_brake_force(brake_input: float, velocity: Vector3) -> Vector3:
+func get_brake_force(collision_index: int, brake_input: float, velocity: Vector3) -> Vector3:
 	if brake_input > 0.0:
 		var forward_direction := -global_basis.z
 		var relative_velocity := forward_direction.dot(velocity)
@@ -145,14 +151,14 @@ func get_brake_force(brake_input: float, velocity: Vector3) -> Vector3:
 	else: return Vector3(0, 0, 0)
 
 
-func get_steering_force(velocity: Vector3) -> Vector3:
+func get_steering_force(collision_index: int, velocity: Vector3) -> Vector3:
 	var cornering_stiffness := 750.0 # magic cornering coefficient - N per rad slip angle
 	var camber_stiffness := 100.0
 	
 	# get forward and side vectors to calculate slip angle
 	var forward_direction := -global_basis.z
 	var side_direction := global_basis.x
-	var ground_normal := get_collision_normal()
+	var ground_normal := get_collision_normal(collision_index)
 	
 	# project the forward and side vectors onto the ground normal
 	forward_direction = (forward_direction - forward_direction.project(ground_normal)).normalized()

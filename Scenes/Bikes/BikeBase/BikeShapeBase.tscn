@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxx4o3muu3236"]
+
+[ext_resource type="Script" uid="uid://bjhdcb30ksff3" path="res://Scenes/Bikes/BikeBase/Scripts/bike_shape_base.gd" id="1_e78fi"]
+
+[node name="BikeBase" type="RigidBody3D"]
+script = ExtResource("1_e78fi")

@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://5f0lanmrvn7r"]
+[gd_scene load_steps=9 format=3 uid="uid://5f0lanmrvn7r"]
 
 [ext_resource type="Texture2D" uid="uid://6rm8jcvrb02p" path="res://Assets/citrus_orchard_puresky_4k.exr" id="1_sr1yi"]
-[ext_resource type="PackedScene" uid="uid://ejvh17vkkqr8" path="res://Scenes/Bikes/YtTues/YtTues.tscn" id="2_sr1yi"]
 [ext_resource type="Texture2D" uid="uid://cqi46pil1b70d" path="res://addons/kenney_prototype_textures/dark/texture_07.png" id="2_w6hgi"]
+[ext_resource type="PackedScene" uid="uid://c2w0c7eqmunmk" path="res://Scenes/Bikes/YtTues/YtTuesShapeTest.tscn" id="3_w6hgi"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_w6hgi"]
 panorama = ExtResource("1_sr1yi")
@@ -27,13 +27,16 @@ uv1_triplanar = true
 uv2_scale = Vector3(-10, -10, -10)
 uv2_triplanar = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6hgi"]
+albedo_color = Color(0.444112, 0.281411, 0.179994, 1)
+
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w6hgi")
 
 [node name="CSGTerrain" type="CSGBox3D" parent="."]
-transform = Transform3D(53.9221, 0, 0, 0, 0.247797, 0, 0, 0, 139.035, -0.024147, 0.0233753, -0.0136616)
+transform = Transform3D(53.9221, 0, 0, 0, 0.247797, 0, 0, 0, 139.035, -0.0218601, 0.0176045, -0.014086)
 use_collision = true
 material = SubResource("StandardMaterial3D_nu7tq")
 
@@ -55,5 +58,16 @@ transform = Transform3D(0.0185453, 0, 0, 0, 4.03555, 0, 0, 0, 0.0486109, -0.4846
 [node name="CSGBox3D6" type="CSGBox3D" parent="CSGTerrain"]
 transform = Transform3D(0.0185453, 0, 0, 0, 4.03555, 0, 0, 0, 0.0486109, -0.484618, 3.00922, -0.0452533)
 
-[node name="YtTues" parent="." instance=ExtResource("2_sr1yi")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0389614, 0.685068, 0.909859)
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGTerrain"]
+transform = Transform3D(-4.37114e-08, 0, -2.57844, 0, 1, 0, 0.387831, 0, -4.37114e-08, 0.0676869, 0.0876848, 0.0640994)
+polygon = PackedVector2Array(0.123523, 0.32755, 0.272919, 5.19406, 0.384616, -0.376409)
+depth = 0.1
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+transform = Transform3D(-1.58328e-07, 0.704758, 0.95066, 2.70487e-07, -0.709448, 0.944376, 2.525, 1.2019e-07, -4.15547e-08, 13.8367, 1.16557, 0.604887)
+polygon = PackedVector2Array(-1.13324, 0.0924055, -1.10056, 0.910045, 2.72601, 0.882052, 2.64319, 0.237704, 1.78355, 0.585818, 0.787887, 0.670794, -0.276254, 0.528949)
+smooth_faces = true
+material = SubResource("StandardMaterial3D_w6hgi")
+
+[node name="YtTuesShapeTest" parent="." instance=ExtResource("3_w6hgi")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.000385523, 0.682181, 0.00595754)

@@ -1,5 +1,5 @@
 extends RigidBody3D
-class_name BikeBase
+class_name BikeShapeBase
 
 enum WheelType {
 	FRONT,
@@ -8,7 +8,7 @@ enum WheelType {
 
 #region Wheel Settings and Settings Dictionaries
 @export_category("Front Wheel")
-@export var front_wheel : BikeWheelBase
+@export var front_wheel : BikeShapeWheelBase
 @export_group("Front Wheel Settings")
 @export var f_spring_strength := 6000.0
 @export var f_spring_damping := 350.0
@@ -29,7 +29,7 @@ enum WheelType {
 }
 
 @export_category("Rear Wheel")
-@export var rear_wheel : BikeWheelBase
+@export var rear_wheel : BikeShapeWheelBase
 @export_group("Rear Wheel Settings")
 @export var r_spring_strength := 6000.0
 @export var r_spring_damping := 350.0
@@ -49,7 +49,7 @@ enum WheelType {
 }
 #endregion
 
-var wheels: Array[BikeWheelBase]
+var wheels: Array[BikeShapeWheelBase]
 
 var pedal_input := 0.0
 var steering_input := 0.0
@@ -85,10 +85,23 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	for wheel in wheels:
+		wheel.force_shapecast_update()
 		if wheel.is_colliding():
-			var velocity_at_contact = _get_point_velocity(wheel.get_collision_point())
-			var force_vector = wheel.get_forces(pedal_input, interpolate_steering(steering_input, delta), front_brake_input, rear_brake_input, velocity_at_contact)
-			var force_pos_offset := wheel.get_collision_point() - global_position
+			print("here")
+			# get index of nearest collision
+			var collision_count = wheel.get_collision_count()
+			var closest_collision_index : int
+			var closest_distance = INF
+			
+			for i in collision_count:
+				var distance = wheel.get_collision_point(i).distance_to(global_position)
+				if distance < closest_distance:
+					closest_distance = distance
+					closest_collision_index = i
+			
+			var velocity_at_contact = _get_point_velocity(wheel.get_collision_point(closest_collision_index))
+			var force_vector = wheel.get_forces(closest_collision_index, pedal_input, interpolate_steering(steering_input, delta), front_brake_input, rear_brake_input, velocity_at_contact)
+			var force_pos_offset := wheel.get_collision_point(closest_collision_index) - global_position
 			apply_force(force_vector, force_pos_offset)
 
 

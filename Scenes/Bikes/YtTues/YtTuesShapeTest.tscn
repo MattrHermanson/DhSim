@@ -1,14 +1,14 @@
-[gd_scene load_steps=15 format=4 uid="uid://ejvh17vkkqr8"]
+[gd_scene load_steps=17 format=4 uid="uid://c2w0c7eqmunmk"]
 
-[ext_resource type="Script" uid="uid://cxlllovhkp04y" path="res://Scenes/Bikes/BikeBase/Scripts/bike_base.gd" id="1_4ynty"]
-[ext_resource type="ArrayMesh" uid="uid://cvpf6v1lbg040" path="res://Scenes/Bikes/YtTues/Meshes/Frame_BSurfaceMesh_003.res" id="2_np068"]
-[ext_resource type="ArrayMesh" uid="uid://d4lj7fbdvocf6" path="res://Scenes/Bikes/YtTues/Meshes/Frame_Circle_006.res" id="3_3qdx3"]
-[ext_resource type="ArrayMesh" uid="uid://cenjfmpvpsuuh" path="res://Scenes/Bikes/YtTues/Meshes/Frame_Circle_003.res" id="5_hkuws"]
-[ext_resource type="ArrayMesh" uid="uid://yioym7rqg7uk" path="res://Scenes/Bikes/YtTues/Meshes/Frame_Cylinder_004.res" id="6_sr646"]
-[ext_resource type="ArrayMesh" uid="uid://b2bft80ugrtsw" path="res://Scenes/Bikes/YtTues/Meshes/Frame_Circle_019.res" id="7_0bcar"]
-[ext_resource type="Script" uid="uid://cbvqbxt6wocea" path="res://Scenes/Bikes/BikeBase/Scripts/bike_wheel_base.gd" id="7_3qdx3"]
-[ext_resource type="ArrayMesh" uid="uid://43u5skivus1a" path="res://Scenes/Bikes/YtTues/Meshes/FrontWheel_Circle_001.res" id="8_ljddd"]
-[ext_resource type="ArrayMesh" uid="uid://c76ruvi6me6iu" path="res://Scenes/Bikes/YtTues/Meshes/RearWheel_Circle_004.res" id="9_ljddd"]
+[ext_resource type="Script" uid="uid://bjhdcb30ksff3" path="res://Scenes/Bikes/BikeBase/Scripts/bike_shape_base.gd" id="1_dh8mt"]
+[ext_resource type="ArrayMesh" uid="uid://cvpf6v1lbg040" path="res://Scenes/Bikes/YtTues/Meshes/Frame_BSurfaceMesh_003.res" id="2_1f7af"]
+[ext_resource type="ArrayMesh" uid="uid://d4lj7fbdvocf6" path="res://Scenes/Bikes/YtTues/Meshes/Frame_Circle_006.res" id="3_i1le6"]
+[ext_resource type="ArrayMesh" uid="uid://b2bft80ugrtsw" path="res://Scenes/Bikes/YtTues/Meshes/Frame_Circle_019.res" id="4_3xx0l"]
+[ext_resource type="ArrayMesh" uid="uid://cenjfmpvpsuuh" path="res://Scenes/Bikes/YtTues/Meshes/Frame_Circle_003.res" id="5_gtfs7"]
+[ext_resource type="ArrayMesh" uid="uid://yioym7rqg7uk" path="res://Scenes/Bikes/YtTues/Meshes/Frame_Cylinder_004.res" id="6_7uq4k"]
+[ext_resource type="Script" uid="uid://crf2h862cbfgq" path="res://Scenes/Bikes/BikeBase/Scripts/bike_shape_wheel_base.gd" id="7_dh8mt"]
+[ext_resource type="ArrayMesh" uid="uid://43u5skivus1a" path="res://Scenes/Bikes/YtTues/Meshes/FrontWheel_Circle_001.res" id="8_uow4u"]
+[ext_resource type="ArrayMesh" uid="uid://c76ruvi6me6iu" path="res://Scenes/Bikes/YtTues/Meshes/RearWheel_Circle_004.res" id="9_303t3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3huqr"]
 resource_name = "Seat_Post"
@@ -55,25 +55,31 @@ shadow_mesh = SubResource("ArrayMesh_2d536")
 [sub_resource type="BoxShape3D" id="BoxShape3D_np068"]
 size = Vector3(0.186325, 0.665161, 1)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_1f7af"]
+radius = 0.36
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_i1le6"]
+radius = 0.36
+
 [sub_resource type="LabelSettings" id="LabelSettings_ljddd"]
 font_size = 32
 font_color = Color(1, 0.145098, 1, 1)
 
-[node name="YtTues" type="RigidBody3D" node_paths=PackedStringArray("front_wheel", "rear_wheel")]
-mass = 95.1
+[node name="YtTuesShapeTest" type="RigidBody3D" node_paths=PackedStringArray("front_wheel", "rear_wheel")]
+mass = 95.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0.55, 0)
-script = ExtResource("1_4ynty")
+script = ExtResource("1_dh8mt")
 front_wheel = NodePath("FrontWheel")
 rear_wheel = NodePath("RearWheel")
-metadata/_custom_type_script = "uid://cxlllovhkp04y"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = ExtResource("2_np068")
+mesh = ExtResource("2_1f7af")
+skeleton = NodePath("")
 
 [node name="shock" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0113891, 0.0860765, -0.120048)
-mesh = ExtResource("3_3qdx3")
+mesh = ExtResource("3_i1le6")
 
 [node name="seat" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(0.35, 0, 0, 0, 0.334562, -0.102803, 0, 0.102803, 0.334562, -0.00294569, 0.303414, 0.107273)
@@ -81,43 +87,46 @@ mesh = SubResource("ArrayMesh_1i1oi")
 
 [node name="pedals" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0621122, -0.200741, 0.234463)
-mesh = ExtResource("7_0bcar")
+mesh = ExtResource("4_3xx0l")
 
 [node name="handlebars" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(-4.37114e-08, -1.77636e-15, 1, 0.259089, 0.965854, 1.13251e-08, -0.965854, 0.259089, -4.22188e-08, 0.0229423, 0.524688, -0.440251)
-mesh = ExtResource("5_hkuws")
+mesh = ExtResource("5_gtfs7")
 
 [node name="fork" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0.464409, 0.885621, 2.03e-08, -0.885621, 0.464409, -3.87117e-08, -0.00442466, 0.233387, -0.591368)
-mesh = ExtResource("6_sr646")
+mesh = ExtResource("6_7uq4k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00221128, 0.124232, -0.0122006)
 shape = SubResource("BoxShape3D_np068")
 
-[node name="FrontWheel" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00159907, -0.152994, -0.827043)
-target_position = Vector3(0, -0.4, 0)
-script = ExtResource("7_3qdx3")
-metadata/_custom_type_script = "uid://cbvqbxt6wocea"
+[node name="FrontWheel" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.152204, -0.826976)
+shape = SubResource("SphereShape3D_1f7af")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+script = ExtResource("7_dh8mt")
+metadata/_custom_type_script = "uid://crf2h862cbfgq"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FrontWheel"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.00510715, 0.00326544)
-mesh = ExtResource("8_ljddd")
+mesh = ExtResource("8_uow4u")
+skeleton = NodePath("")
 
-[node name="RearWheel" type="RayCast3D" parent="."]
+[node name="RearWheel" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, -0.000388867, -0.000301888, 0.000388446, 0.999999, -0.00136247, 0.000302429, 0.00136235, 0.999999, 0, -0.153, 0.457)
-target_position = Vector3(0, -0.4, 0)
-script = ExtResource("7_3qdx3")
-metadata/_custom_type_script = "uid://cbvqbxt6wocea"
+shape = SubResource("SphereShape3D_i1le6")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+script = ExtResource("7_dh8mt")
+metadata/_custom_type_script = "uid://crf2h862cbfgq"
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="RearWheel"]
-transform = Transform3D(-1, -5.36033e-11, -8.73697e-08, -4.75211e-11, 1, 0, 8.74279e-08, 0, -1, 0, 0, 0)
-mesh = ExtResource("9_ljddd")
-skeleton = NodePath("../../FrontWheel")
+mesh = ExtResource("9_303t3")
+skeleton = NodePath("")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.552, 1.335)
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.552, 1.565)
 fov = 90.0
 
 [node name="Control" type="Control" parent="Camera3D"]
