@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwrhwqxnb8dyl"]
-
-[ext_resource type="Script" uid="uid://crf2h862cbfgq" path="res://Scenes/Bikes/BikeBase/Scripts/bike_shape_wheel_base.gd" id="1_qmu5m"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_qmu5m"]
-
-[node name="BikeShapeWheelBase" type="ShapeCast3D"]
-shape = SubResource("SphereShape3D_qmu5m")
-script = ExtResource("1_qmu5m")
