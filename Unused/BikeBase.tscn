@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://qpfqubxrgo1a"]
 
-[ext_resource type="Script" uid="uid://cxlllovhkp04y" path="res://Scenes/Bikes/BikeBase/Scripts/bike_base.gd" id="1_a2po7"]
+[ext_resource type="Script" uid="uid://cxlllovhkp04y" path="res://Unused/bike_base.gd" id="1_a2po7"]
 
 [node name="BikeBase" type="RigidBody3D"]
 script = ExtResource("1_a2po7")

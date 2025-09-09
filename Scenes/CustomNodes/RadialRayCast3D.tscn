@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://ixpcwm58f8i1"]
+
+[ext_resource type="Script" uid="uid://bbp8lrr6tt1wv" path="res://Scenes/CustomNodes/Scripts/radial_ray_cast_3d.gd" id="1_ms3yv"]
+
+[node name="RadialRayCast3d" type="Node3D"]
+script = ExtResource("1_ms3yv")
+
+[node name="@RayCast3D@21770" type="RayCast3D" parent="."]
+target_position = Vector3(0, 1, 0)
+
+[node name="@RayCast3D@21771" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0.707107, 0.707107)
+
+[node name="@RayCast3D@21772" type="RayCast3D" parent="."]
+target_position = Vector3(0, 6.12303e-17, 1)
+
+[node name="@RayCast3D@21773" type="RayCast3D" parent="."]
+target_position = Vector3(0, -0.707107, 0.707107)
+
+[node name="@RayCast3D@21774" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1, 1.22461e-16)
+
+[node name="@RayCast3D@21775" type="RayCast3D" parent="."]
+target_position = Vector3(0, -0.707107, -0.707107)
+
+[node name="@RayCast3D@21776" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1.83691e-16, -1)
+
+[node name="@RayCast3D@21777" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0.707107, -0.707107)

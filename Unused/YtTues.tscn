@@ -1,12 +1,12 @@
 [gd_scene load_steps=15 format=4 uid="uid://ejvh17vkkqr8"]
 
-[ext_resource type="Script" uid="uid://cxlllovhkp04y" path="res://Scenes/Bikes/BikeBase/Scripts/bike_base.gd" id="1_4ynty"]
+[ext_resource type="Script" uid="uid://cxlllovhkp04y" path="res://Unused/bike_base.gd" id="1_4ynty"]
 [ext_resource type="ArrayMesh" uid="uid://cvpf6v1lbg040" path="res://Scenes/Bikes/YtTues/Meshes/Frame_BSurfaceMesh_003.res" id="2_np068"]
 [ext_resource type="ArrayMesh" uid="uid://d4lj7fbdvocf6" path="res://Scenes/Bikes/YtTues/Meshes/Frame_Circle_006.res" id="3_3qdx3"]
 [ext_resource type="ArrayMesh" uid="uid://cenjfmpvpsuuh" path="res://Scenes/Bikes/YtTues/Meshes/Frame_Circle_003.res" id="5_hkuws"]
 [ext_resource type="ArrayMesh" uid="uid://yioym7rqg7uk" path="res://Scenes/Bikes/YtTues/Meshes/Frame_Cylinder_004.res" id="6_sr646"]
 [ext_resource type="ArrayMesh" uid="uid://b2bft80ugrtsw" path="res://Scenes/Bikes/YtTues/Meshes/Frame_Circle_019.res" id="7_0bcar"]
-[ext_resource type="Script" uid="uid://cbvqbxt6wocea" path="res://Scenes/Bikes/BikeBase/Scripts/bike_wheel_base.gd" id="7_3qdx3"]
+[ext_resource type="Script" uid="uid://cbvqbxt6wocea" path="res://Unused/bike_wheel_base.gd" id="7_3qdx3"]
 [ext_resource type="ArrayMesh" uid="uid://43u5skivus1a" path="res://Scenes/Bikes/YtTues/Meshes/FrontWheel_Circle_001.res" id="8_ljddd"]
 [ext_resource type="ArrayMesh" uid="uid://c76ruvi6me6iu" path="res://Scenes/Bikes/YtTues/Meshes/RearWheel_Circle_004.res" id="9_ljddd"]
 
@@ -96,7 +96,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00221128, 0.124232, -0.012
 shape = SubResource("BoxShape3D_np068")
 
 [node name="FrontWheel" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00159907, -0.152994, -0.827043)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00159907, -0.15593, -0.827043)
 target_position = Vector3(0, -0.4, 0)
 script = ExtResource("7_3qdx3")
 metadata/_custom_type_script = "uid://cbvqbxt6wocea"

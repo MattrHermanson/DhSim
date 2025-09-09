@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba0ye4v5nl6tx"]
+
+[ext_resource type="Script" uid="uid://c01j1xgjnmiya" path="res://Scenes/Bikes/BikeBase/Scripts/bike_radial_wheel_base.gd" id="1_1pglx"]
+
+[node name="BikeRadialWheelBase" type="Node3D"]
+script = ExtResource("1_1pglx")
+raycast_resolution = 36
+metadata/_custom_type_script = "uid://bbp8lrr6tt1wv"
+
+[node name="@RayCast3D@31354" type="RayCast3D" parent="."]
+target_position = Vector3(0, 1, 0)
+metadata/_edit_lock_ = true
+
+[node name="@RayCast3D@31355" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0.707107, 0.707107)
+metadata/_edit_lock_ = true
+
+[node name="@RayCast3D@31356" type="RayCast3D" parent="."]
+target_position = Vector3(0, 6.12303e-17, 1)
+metadata/_edit_lock_ = true
+
+[node name="@RayCast3D@31357" type="RayCast3D" parent="."]
+target_position = Vector3(0, -0.707107, 0.707107)
+metadata/_edit_lock_ = true
+
+[node name="@RayCast3D@31358" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1, 1.22461e-16)
+metadata/_edit_lock_ = true
+
+[node name="@RayCast3D@31359" type="RayCast3D" parent="."]
+target_position = Vector3(0, -0.707107, -0.707107)
+metadata/_edit_lock_ = true
+
+[node name="@RayCast3D@31360" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1.83691e-16, -1)
+metadata/_edit_lock_ = true
+
+[node name="@RayCast3D@31361" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0.707107, -0.707107)
+metadata/_edit_lock_ = true

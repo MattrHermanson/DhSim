@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c58p7pb8sbctw"]
+
+[ext_resource type="Script" uid="uid://dvfnwadc3j73x" path="res://Scenes/Bikes/BikeBase/Scripts/bike_radial_base.gd" id="1_vudux"]
+
+[node name="BikeBase" type="RigidBody3D"]
+script = ExtResource("1_vudux")

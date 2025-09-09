@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://6rm8jcvrb02p" path="res://Assets/citrus_orchard_puresky_4k.exr" id="1_sr1yi"]
 [ext_resource type="Texture2D" uid="uid://cqi46pil1b70d" path="res://addons/kenney_prototype_textures/dark/texture_07.png" id="2_w6hgi"]
-[ext_resource type="PackedScene" uid="uid://ejvh17vkkqr8" path="res://Scenes/Bikes/YtTues/YtTues.tscn" id="3_w6hgi"]
+[ext_resource type="PackedScene" uid="uid://bpc027id4e53q" path="res://Scenes/Bikes/YtTues/YtTuesRadial.tscn" id="3_w6hgi"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_w6hgi"]
 panorama = ExtResource("1_sr1yi")
@@ -69,5 +69,5 @@ polygon = PackedVector2Array(-1.13324, 0.0924055, -1.10056, 0.910045, 2.72601, 0
 smooth_faces = true
 material = SubResource("StandardMaterial3D_w6hgi")
 
-[node name="YtTues" parent="." instance=ExtResource("3_w6hgi")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0121822, 0.657231, 0.57337)
+[node name="YtTuesRadial" parent="." instance=ExtResource("3_w6hgi")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.165367, 0.659208, 0.102064)
