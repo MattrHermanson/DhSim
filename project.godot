@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="DhSim"
-run/main_scene="uid://5f0lanmrvn7r"
+run/main_scene="uid://dx0ulaai7fstx"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
