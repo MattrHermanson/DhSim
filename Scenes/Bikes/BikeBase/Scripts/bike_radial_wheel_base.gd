@@ -28,7 +28,7 @@ func setup_wheel(settings_dict: Dictionary) -> void:
 	spring_strength = settings_dict["spring_strength"]
 	spring_damping = settings_dict["spring_damping"]
 	wheel_radius = settings_dict["wheel_radius"]
-	raycast_length = wheel_radius + 0.04
+	raycast_length = wheel_radius + 0.01
 	pedal_force = settings_dict["pedal_force"]
 	brake_force = settings_dict["brake_force"]
 	head_tube_angle = settings_dict["head_tube_angle"]
@@ -69,9 +69,6 @@ func get_forces(pedal_input: float, steering_input: float, front_brake_input: fl
 	
 	#limit total force
 	total_force_vector += apply_friction_circle(longitudinal_force_vector, lateral_force_vector, total_force_vector.length(), static_friction, kinetic_friction)
-	
-	if is_sliding:
-		print("sliding")
 	
 	return total_force_vector
 
@@ -142,8 +139,8 @@ func get_brake_force(brake_input: float, velocity: Vector3) -> Vector3:
 
 
 func get_steering_force(velocity: Vector3) -> Vector3:
-	var cornering_stiffness := 750.0 # magic cornering coefficient - N per rad slip angle
-	var camber_stiffness := 100.0
+	var cornering_stiffness := 2500.0 # magic cornering coefficient - N per rad slip angle
+	var camber_stiffness := 0.0#100.0
 	
 	# get forward and side vectors to calculate slip angle
 	var forward_direction := -global_basis.z
@@ -207,7 +204,7 @@ func apply_friction_circle(longitudinal_force: Vector3, lateral_force: Vector3, 
 	
 	var total_desired := sqrt((longitudinal_force.length() ** 2) + (lateral_force.length() ** 2))
 	
-	if total_desired > max_grip:
+	if false: # TODO total_desired > max_grip
 		
 		# start sliding
 		max_grip = normal_force * kinetic_friction

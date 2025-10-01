@@ -99,6 +99,7 @@ func _get_nearest_collision_index() -> int:
 	if closest_ray_index == null:
 		return -1
 	else:
+		DebugDraw3D.draw_line(global_position, raycast_array[closest_ray_index].get_collision_point(), Color.BLUE_VIOLET) # TODO REMOVE
 		return closest_ray_index
 
 

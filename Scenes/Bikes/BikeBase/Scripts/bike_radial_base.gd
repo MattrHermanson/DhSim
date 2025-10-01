@@ -57,9 +57,6 @@ var lean_input := 0.0
 var front_brake_input := 0.0
 var rear_brake_input := 0.0
 
-var reset_position : Array[Vector3] = []
-var reset_basis : Array[Basis] = []
-
 func _ready() -> void:
 		assert(front_wheel != null, "ERROR: 'front_wheel' must not be null!")
 		assert(rear_wheel != null, "ERROR: 'rear_wheel' must not be null!")
@@ -67,9 +64,7 @@ func _ready() -> void:
 		wheels = [front_wheel, rear_wheel]
 		wheels[0].setup_wheel(f_settings_dict)
 		wheels[1].setup_wheel(r_settings_dict)
-		
-		reset_position.append(global_position)
-		reset_basis.append(global_basis)
+
 
 func _process(delta: float) -> void:
 	DebugDraw3D.draw_box(to_global(center_of_mass), global_basis, Vector3(0.1, 0.1, 0.1), Color.GREEN_YELLOW, true) # draw center of mass
@@ -78,8 +73,6 @@ func _process(delta: float) -> void:
 	pedal_input = Input.get_action_strength("Pedal")
 	front_brake_input = Input.get_action_strength("FrontBrake")
 	rear_brake_input = Input.get_action_strength("RearBrake")
-	if Input.is_action_just_pressed("Reset"):
-		reset_bike()
 	
 	$Camera3D/Control/Label.text = "Speed: " + str(snapped(linear_velocity.length(), 0.1)) + " F: " + str(wheels[0].is_sliding) + " R: " + str(wheels[1].is_sliding) + "\nLean: " + str(snapped(rad_to_deg(-global_rotation.z), 1))
 
@@ -100,7 +93,7 @@ func _get_point_velocity(point: Vector3) -> Vector3:
 # Steering Interpolation Variables
 var max_lean_angle := 25.0 # degrees
 var integration_stored := 0.0
-var P := 2.5
+var P := 3.0
 var I := 0.0 # Not using I
 var D := 2.0
 
@@ -126,11 +119,3 @@ func interpolate_steering(steering_input: float, delta: float) -> float:
 	correction_steering_angle = clamp(correction_steering_angle, -1, 1)
 	
 	return correction_steering_angle
-
-
-func reset_bike() -> void:
-	linear_velocity = Vector3.ZERO
-	angular_velocity = Vector3.ZERO
-	
-	global_position = reset_position[0]
-	global_basis = reset_basis[0]

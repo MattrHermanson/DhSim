@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dx0ulaai7fstx"]
+[gd_scene load_steps=9 format=3 uid="uid://dx0ulaai7fstx"]
 
 [ext_resource type="Texture2D" uid="uid://6rm8jcvrb02p" path="res://Assets/citrus_orchard_puresky_4k.exr" id="1_koiqj"]
 [ext_resource type="Texture2D" uid="uid://cqi46pil1b70d" path="res://addons/kenney_prototype_textures/dark/texture_07.png" id="2_4fp0u"]
+[ext_resource type="PackedScene" uid="uid://bpc027id4e53q" path="res://Scenes/Bikes/YtTues/YtTuesRadial.tscn" id="3_koiqj"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_w6hgi"]
 panorama = ExtResource("1_koiqj")
@@ -55,54 +56,15 @@ transform = Transform3D(0.0185453, 0, 0, 0, 4.03555, 0, 0, 0, 0.0486109, -0.4846
 transform = Transform3D(0.0185453, 0, 0, 0, 4.03555, 0, 0, 0, 0.0486109, -0.484618, 3.00922, -0.189946)
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="CSGTerrain"]
-transform = Transform3D(0.0185453, 0, 0, 0, 4.03554, 0, 0, 0, 0.0486109, -0.165333, 16.8229, 0.00345338)
-size = Vector3(1, 7.84601, 3.96028)
+transform = Transform3D(0.0185453, 0, 0, 0, 4.0355377, 0, 0, 0, 0.048610866, -0.165333, 2.280059, 0.003453379)
+size = Vector3(1, 0.6386266, 3.96028)
 material = SubResource("StandardMaterial3D_xlmna")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.513, 4.28, 0)
+[node name="YtTuesRadial" parent="." instance=ExtResource("3_koiqj")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.2643077, 0.666, 0)
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -0.18818307, 0.6438268, 0.187)
+visible = false
 projection = 1
-size = 8.32
-
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.99545, -0.0952898, 0, 0.0952898, 0.99545, 0, 1.09691, 3.0966)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="RigidBody3D"]
-size = Vector3(0.543, 0.437, 7.064)
-
-[node name="RigidBody3D2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.919636, -0.392771, 0, 0.392771, 0.919636, 0, 3.16138, 2.36236)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="RigidBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 0.974738, -0.223352, 0, 0.223352, 0.974738, 0, 1.07833, 0.181385)
-size = Vector3(0.543, 0.437, 9.52907)
-
-[node name="RigidBody3D3" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.99756, 0.0698087, 0, -0.0698087, 0.99756, 0, 4.95002, -4.74926)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="RigidBody3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.78902, 1.16878)
-size = Vector3(0.543, 0.437, 5.18483)
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.49173, -0.971211)
-height = 0.576
-
-[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="CSGCylinder3D"]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-node_b = NodePath("../../RigidBody3D")
-angular_limit_x/enabled = false
-
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 5.42736, -3.4405)
-height = 0.576
-
-[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="CSGCylinder3D2"]
-node_b = NodePath("../../RigidBody3D3")
-angular_limit_x/enabled = false
-
-[node name="ChainToSeat" type="Generic6DOFJoint3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.698257, 7.49673)
-node_a = NodePath("../RigidBody3D")
-node_b = NodePath("../RigidBody3D2")
-angular_limit_x/enabled = false
+size = 1.52
