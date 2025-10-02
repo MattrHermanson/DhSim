@@ -74,13 +74,14 @@ func _process(delta: float) -> void:
 	front_brake_input = Input.get_action_strength("FrontBrake")
 	rear_brake_input = Input.get_action_strength("RearBrake")
 	
-	$Camera3D/Control/Label.text = "Speed: " + str(snapped(linear_velocity.length(), 0.1)) + " F: " + str(wheels[0].is_sliding) + " R: " + str(wheels[1].is_sliding) + "\nLean: " + str(snapped(rad_to_deg(-global_rotation.z), 1))
+	#$Camera3D/Control/Label.text = "Speed: " + str(snapped(linear_velocity.length(), 0.1)) + " F: " + str(wheels[0].is_sliding) + " R: " + str(wheels[1].is_sliding) + "\nLean: " + str(snapped(rad_to_deg(-global_rotation.z), 1))
+
 
 func _physics_process(delta: float) -> void:
 	for wheel in wheels:
 		if wheel.is_colliding():
 			var velocity_at_contact = _get_point_velocity(wheel.get_collision_point())
-			var force_vector = wheel.get_forces(pedal_input, interpolate_steering(steering_input, delta), front_brake_input, rear_brake_input, velocity_at_contact)
+			var force_vector = wheel.get_forces(pedal_input, steering_input, front_brake_input, rear_brake_input, velocity_at_contact)
 			var force_pos_offset := wheel.get_collision_point() - global_position
 			apply_force(force_vector, force_pos_offset)
 
@@ -88,34 +89,3 @@ func _physics_process(delta: float) -> void:
 # Helper function to get velocity at point
 func _get_point_velocity(point: Vector3) -> Vector3:
 	return linear_velocity + angular_velocity.cross(point - global_position)
-
-
-# Steering Interpolation Variables
-var max_lean_angle := 25.0 # degrees
-var integration_stored := 0.0
-var P := 3.0
-var I := 0.0 # Not using I
-var D := 2.0
-
-# auto steers towards a lean angle
-func interpolate_steering(steering_input: float, delta: float) -> float:
-	var lean_angle := rad_to_deg(-global_rotation.z) # lean angle in degrees
-	if is_zero_approx(lean_angle):
-		lean_angle = 0.0
-	
-	# get target lean angle and current error
-	var target_lean_angle := steering_input * max_lean_angle
-	var error := target_lean_angle - lean_angle
-	
-	#integration_stored = integration_stored + (error * delta) #I term not being used
-	
-	var p_term := error * P
-	var i_term := integration_stored * I
-	var d_term := rad_to_deg(-angular_velocity.z) * D
-	
-	var correction_steering_angle := (p_term + i_term + d_term) * -1
-	
-	correction_steering_angle /= 45.0 # maps steering degrees to steering input range (-1,1) TODO get max steering angle, don't hard code!!!
-	correction_steering_angle = clamp(correction_steering_angle, -1, 1)
-	
-	return correction_steering_angle

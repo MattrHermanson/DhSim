@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bpc027id4e53q"]
+[gd_scene load_steps=16 format=4 uid="uid://bpc027id4e53q"]
 
 [ext_resource type="Script" uid="uid://dvfnwadc3j73x" path="res://Scenes/Bikes/BikeBase/Scripts/bike_radial_base.gd" id="1_32fpy"]
 [ext_resource type="ArrayMesh" uid="uid://cvpf6v1lbg040" path="res://Scenes/Bikes/YtTues/Meshes/Frame_BSurfaceMesh_003.res" id="2_jxh8t"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://c01j1xgjnmiya" path="res://Scenes/Bikes/BikeBase/Scripts/bike_radial_wheel_base.gd" id="7_32fpy"]
 [ext_resource type="ArrayMesh" uid="uid://43u5skivus1a" path="res://Scenes/Bikes/YtTues/Meshes/FrontWheel_Circle_001.res" id="8_5m1qq"]
 [ext_resource type="ArrayMesh" uid="uid://c76ruvi6me6iu" path="res://Scenes/Bikes/YtTues/Meshes/RearWheel_Circle_004.res" id="9_ark6j"]
+[ext_resource type="Script" uid="uid://coh6ii05otuoc" path="res://Scenes/CustomNodes/Scripts/pivot.gd" id="10_jxh8t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3huqr"]
 resource_name = "Seat_Post"
@@ -413,17 +414,21 @@ metadata/_edit_lock_ = true
 target_position = Vector3(0, 0.354531, -0.0625133)
 metadata/_edit_lock_ = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.552, 1.335)
+[node name="CameraPivot" type="Node3D" parent="."]
+script = ExtResource("10_jxh8t")
+metadata/_custom_type_script = "uid://coh6ii05otuoc"
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881898, 0, -0.25881898, 0.9659259, 0, 0.552, 1.335)
 fov = 90.0
 
-[node name="Control" type="Control" parent="Camera3D"]
+[node name="Control" type="Control" parent="CameraPivot/Camera3D"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="Camera3D/Control"]
+[node name="Label" type="Label" parent="CameraPivot/Camera3D/Control"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0

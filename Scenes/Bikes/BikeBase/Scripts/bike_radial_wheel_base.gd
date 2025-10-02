@@ -1,3 +1,4 @@
+@tool
 extends RadialRayCast3D
 class_name BikeRadialWheelBase
 
@@ -52,14 +53,14 @@ func get_forces(pedal_input: float, steering_input: float, front_brake_input: fl
 	var kinetic_friction = 0.7
 	
 	# Add all wheel forces
-	total_force_vector += get_normal_force(velocity)
+	total_force_vector = get_normal_force(velocity)
 	
 	# Add rear-only forces
 	if wheel_type == WheelType.REAR:
 		update_animation(velocity, 0.0)
-		longitudinal_force_vector += get_pedal_force(pedal_input)
+		longitudinal_force_vector = get_pedal_force(pedal_input)
 		longitudinal_force_vector += get_brake_force(rear_brake_input, velocity)
-		lateral_force_vector += get_steering_force(velocity)
+		lateral_force_vector = get_steering_force(velocity)
 	
 	# Add front-only forces
 	if wheel_type == WheelType.FRONT:
@@ -83,8 +84,8 @@ func update_animation(velocity: Vector3, steering_input: float) -> void:
 	# turn the wheel to steering_input
 	var degrees_to_rotate := (max_steering_angle * steering_input) - current_steering_angle
 	current_steering_angle += degrees_to_rotate
-	#global_basis = global_basis.rotated(steering_axis, deg_to_rad(-degrees_to_rotate))
-	rotate_y(deg_to_rad(-degrees_to_rotate))
+	global_basis = global_basis.rotated(steering_axis, deg_to_rad(-degrees_to_rotate)) # TODO ensure this is working correctly
+	#rotate_y(deg_to_rad(-degrees_to_rotate))
 
 
 func get_normal_force(velocity: Vector3) -> Vector3:
@@ -101,7 +102,7 @@ func get_normal_force(velocity: Vector3) -> Vector3:
 func get_pedal_force(pedal_input: float) -> Vector3:
 	if pedal_input > 0.0:
 		var foward_direction := -global_basis.z
-		var contact := get_collision_point()
+		#var contact := get_collision_point() TODO Not being used
 		var force_vector := foward_direction * pedal_force * pedal_input
 		return force_vector
 	else: return Vector3(0, 0, 0)
@@ -192,9 +193,9 @@ func set_steering_axis(angle: float) -> void:
 func apply_friction_circle(longitudinal_force: Vector3, lateral_force: Vector3, normal_force: float, static_friction: float, kinetic_friction: float) -> Vector3:
 	
 	var max_grip := 0.0
-	var forward_direction := -global_basis.z
-	var side_direction := global_basis.x
-	var up_direction := global_basis.y
+	#var forward_direction := -global_basis.z TODO Remove, not being used
+	#var side_direction := global_basis.x TODO Remove, not being used
+	#var up_direction := global_basis.y TODO Remove, not being used
 	
 	# calculate the correct max friction limits
 	if not is_sliding:
