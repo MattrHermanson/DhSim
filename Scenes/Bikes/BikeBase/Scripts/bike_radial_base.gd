@@ -74,14 +74,29 @@ func _process(delta: float) -> void:
 	front_brake_input = Input.get_action_strength("FrontBrake")
 	rear_brake_input = Input.get_action_strength("RearBrake")
 	
-	#$Camera3D/Control/Label.text = "Speed: " + str(snapped(linear_velocity.length(), 0.1)) + " F: " + str(wheels[0].is_sliding) + " R: " + str(wheels[1].is_sliding) + "\nLean: " + str(snapped(rad_to_deg(-global_rotation.z), 1))
+	$CameraPivot/Camera3D/Control/Label.text = "Speed: " + str(snapped(linear_velocity.length(), 0.1)) + "\nLean: " + str(snapped(rad_to_deg(-global_rotation.z), 1))
 
 
 func _physics_process(delta: float) -> void:
+	var steering_output : float
+	
+	# get the average normal vector
+	var total_normal_vector := Vector3.ZERO
+	if wheels[0].is_colliding(): total_normal_vector += wheels[0].get_collision_normal()
+	if wheels[1].is_colliding(): total_normal_vector += wheels[1].get_collision_normal()
+	
+	# don't add roll torque if not on ground
+	if total_normal_vector.is_zero_approx():
+		steering_output = 0.0 # TODO blend in front wheel input in air
+	else:
+		var average_normal_vector := total_normal_vector.normalized()
+		steering_output = roll_pid(steering_input, average_normal_vector)
+	
+	
 	for wheel in wheels:
 		if wheel.is_colliding():
 			var velocity_at_contact = _get_point_velocity(wheel.get_collision_point())
-			var force_vector = wheel.get_forces(pedal_input, steering_input, front_brake_input, rear_brake_input, velocity_at_contact)
+			var force_vector = wheel.get_forces(pedal_input, steering_output, front_brake_input, rear_brake_input, velocity_at_contact)
 			var force_pos_offset := wheel.get_collision_point() - global_position
 			apply_force(force_vector, force_pos_offset)
 
@@ -89,3 +104,54 @@ func _physics_process(delta: float) -> void:
 # Helper function to get velocity at point
 func _get_point_velocity(point: Vector3) -> Vector3:
 	return linear_velocity + angular_velocity.cross(point - global_position)
+
+
+#region Steering System
+# Takes maps input as a target lean angle between 0 to +/- max_lean_angle
+# Uses a PID feedback controller to add roll torque | TODO use a more realistic control vector e.g. moving rider weight
+# Calculates steering angle based on lean angle, speed, desired turn radius
+
+# takes steering input and uses a PID control to add torque to reach target lean angle
+# TODO consider "If you want faster convergence, add anticipated steady-state roll requirement when δ changes quickly; often not needed initially."
+func roll_pid(steering_input: float, normal_vector: Vector3) -> float:
+	
+	# PID Constants
+	var Kp := 75.0
+	var Ki := 0.0
+	var Kd := 200.0
+	
+	# Calculate target lean angle and lean angle error
+	var max_lean_angle := 25.0
+	var target_lean_angle := steering_input * max_lean_angle
+	
+	var lean_axis = -global_basis.z
+	var current_lean_angle := rad_to_deg(normal_vector.signed_angle_to(global_basis.y, lean_axis))
+	var lean_angle_error := target_lean_angle - current_lean_angle
+	
+	var torque = (Kp * lean_angle_error) - (Kd * angular_velocity.z) # Not including I right now
+	
+	apply_torque(Vector3(0, 0, torque)) # apply the roll torque
+	
+	return 0.0 #get_steering_angle(target_lean_angle)
+
+
+# Calculates a steering input [-1, 1] based on desired turn radius.
+func get_steering_angle(lean_target: float) -> float:
+	
+	if abs(linear_velocity.z) < 0.5:
+		return (lean_target / 25.0) * 0.6
+	else:
+		var velocity := -linear_velocity.z
+		var caster_cos := wheels[0].steering_axis.dot(global_basis.y)
+		var denominator := (velocity ** 2) * caster_cos
+		var wheelbase := wheels[0].global_position.distance_to(wheels[1].global_position)
+	
+		var computed_steering_angle := (wheelbase * tan(deg_to_rad(lean_target)) * 9.8) / denominator
+		computed_steering_angle = asin(clamp(computed_steering_angle, -1, 1))
+		computed_steering_angle = rad_to_deg(computed_steering_angle)
+	
+		var steering_output = clamp(computed_steering_angle/wheels[0].max_steering_angle, -1, 1) # map to steering_input range [-1, 1]
+	
+		return steering_output
+
+#endregion

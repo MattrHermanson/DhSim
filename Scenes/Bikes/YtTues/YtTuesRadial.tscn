@@ -115,148 +115,148 @@ metadata/_custom_type_script = "uid://c01j1xgjnmiya"
 mesh = ExtResource("8_5m1qq")
 skeleton = NodePath("")
 
-[node name="@RayCast3D@43622" type="RayCast3D" parent="FrontWheel"]
+[node name="@RayCast3D@21049" type="RayCast3D" parent="FrontWheel"]
 target_position = Vector3(0, 0.36, 0)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43623" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.354531, 0.0625133)
+[node name="@RayCast3D@21050" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.3545308, 0.062513344)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43624" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.338289, 0.123127)
+[node name="@RayCast3D@21051" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.33828935, 0.12312726)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43625" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.311769, 0.18)
+[node name="@RayCast3D@21052" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.31176916, 0.18)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43626" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.275776, 0.231404)
+[node name="@RayCast3D@21053" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.275776, 0.23140356)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43627" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.231404, 0.275776)
+[node name="@RayCast3D@21054" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.23140356, 0.275776)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43628" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.18, 0.311769)
+[node name="@RayCast3D@21055" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.18, 0.31176916)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43629" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.123127, 0.338289)
+[node name="@RayCast3D@21056" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.12312726, 0.33828935)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43630" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.0625133, 0.354531)
+[node name="@RayCast3D@21057" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.062513344, 0.3545308)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43631" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 2.20429e-17, 0.36)
+[node name="@RayCast3D@21058" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 2.2042916e-17, 0.36)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43632" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.0625133, 0.354531)
+[node name="@RayCast3D@21059" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.062513344, 0.3545308)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43633" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.123127, 0.338289)
+[node name="@RayCast3D@21060" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.12312726, 0.33828935)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43634" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.18, 0.311769)
+[node name="@RayCast3D@21061" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.18, 0.31176916)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43635" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.231404, 0.275776)
+[node name="@RayCast3D@21062" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.23140356, 0.275776)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43636" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.275776, 0.231404)
+[node name="@RayCast3D@21063" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.275776, 0.23140356)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43637" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.311769, 0.18)
+[node name="@RayCast3D@21064" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.31176916, 0.18)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43638" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.338289, 0.123127)
+[node name="@RayCast3D@21065" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.33828935, 0.12312726)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43639" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.354531, 0.0625133)
+[node name="@RayCast3D@21066" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.3545308, 0.062513344)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43640" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.36, 4.40858e-17)
+[node name="@RayCast3D@21067" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.36, 4.408583e-17)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43641" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.354531, -0.0625133)
+[node name="@RayCast3D@21068" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.3545308, -0.062513344)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43642" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.338289, -0.123127)
+[node name="@RayCast3D@21069" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.33828935, -0.12312726)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43643" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.311769, -0.18)
+[node name="@RayCast3D@21070" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.31176916, -0.18)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43644" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.275776, -0.231404)
+[node name="@RayCast3D@21071" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.275776, -0.23140356)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43645" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.231404, -0.275776)
+[node name="@RayCast3D@21072" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.23140356, -0.275776)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43646" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.18, -0.311769)
+[node name="@RayCast3D@21073" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.18, -0.31176916)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43647" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.123127, -0.338289)
+[node name="@RayCast3D@21074" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.12312726, -0.33828935)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43648" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -0.0625133, -0.354531)
+[node name="@RayCast3D@21075" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -0.062513344, -0.3545308)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43649" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, -6.61287e-17, -0.36)
+[node name="@RayCast3D@21076" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, -6.612875e-17, -0.36)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43650" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.0625133, -0.354531)
+[node name="@RayCast3D@21077" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.062513344, -0.3545308)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43651" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.123127, -0.338289)
+[node name="@RayCast3D@21078" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.12312726, -0.33828935)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43652" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.18, -0.311769)
+[node name="@RayCast3D@21079" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.18, -0.31176916)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43653" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.231404, -0.275776)
+[node name="@RayCast3D@21080" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.23140356, -0.275776)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43654" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.275776, -0.231404)
+[node name="@RayCast3D@21081" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.275776, -0.23140356)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43655" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.311769, -0.18)
+[node name="@RayCast3D@21082" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.31176916, -0.18)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43656" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.338289, -0.123127)
+[node name="@RayCast3D@21083" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.33828935, -0.12312726)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@43657" type="RayCast3D" parent="FrontWheel"]
-target_position = Vector3(0, 0.354531, -0.0625133)
+[node name="@RayCast3D@21084" type="RayCast3D" parent="FrontWheel"]
+target_position = Vector3(0, 0.3545308, -0.062513344)
 metadata/_edit_lock_ = true
 
 [node name="RearWheel" type="Node3D" parent="."]
@@ -270,148 +270,148 @@ metadata/_custom_type_script = "uid://c01j1xgjnmiya"
 mesh = ExtResource("9_ark6j")
 skeleton = NodePath("")
 
-[node name="@RayCast3D@42919" type="RayCast3D" parent="RearWheel"]
+[node name="@RayCast3D@21085" type="RayCast3D" parent="RearWheel"]
 target_position = Vector3(0, 0.36, 0)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42920" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.354531, 0.0625133)
+[node name="@RayCast3D@21086" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.3545308, 0.062513344)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42921" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.338289, 0.123127)
+[node name="@RayCast3D@21087" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.33828935, 0.12312726)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42922" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.311769, 0.18)
+[node name="@RayCast3D@21088" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.31176916, 0.18)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42923" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.275776, 0.231404)
+[node name="@RayCast3D@21089" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.275776, 0.23140356)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42924" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.231404, 0.275776)
+[node name="@RayCast3D@21090" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.23140356, 0.275776)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42925" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.18, 0.311769)
+[node name="@RayCast3D@21091" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.18, 0.31176916)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42926" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.123127, 0.338289)
+[node name="@RayCast3D@21092" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.12312726, 0.33828935)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42927" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.0625133, 0.354531)
+[node name="@RayCast3D@21093" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.062513344, 0.3545308)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42928" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 2.20429e-17, 0.36)
+[node name="@RayCast3D@21094" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 2.2042916e-17, 0.36)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42929" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.0625133, 0.354531)
+[node name="@RayCast3D@21095" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.062513344, 0.3545308)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42930" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.123127, 0.338289)
+[node name="@RayCast3D@21096" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.12312726, 0.33828935)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42931" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.18, 0.311769)
+[node name="@RayCast3D@21097" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.18, 0.31176916)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42932" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.231404, 0.275776)
+[node name="@RayCast3D@21098" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.23140356, 0.275776)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42933" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.275776, 0.231404)
+[node name="@RayCast3D@21099" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.275776, 0.23140356)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42934" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.311769, 0.18)
+[node name="@RayCast3D@21100" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.31176916, 0.18)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42935" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.338289, 0.123127)
+[node name="@RayCast3D@21101" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.33828935, 0.12312726)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42936" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.354531, 0.0625133)
+[node name="@RayCast3D@21102" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.3545308, 0.062513344)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42937" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.36, 4.40858e-17)
+[node name="@RayCast3D@21103" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.36, 4.408583e-17)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42938" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.354531, -0.0625133)
+[node name="@RayCast3D@21104" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.3545308, -0.062513344)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42939" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.338289, -0.123127)
+[node name="@RayCast3D@21105" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.33828935, -0.12312726)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42940" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.311769, -0.18)
+[node name="@RayCast3D@21106" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.31176916, -0.18)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42941" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.275776, -0.231404)
+[node name="@RayCast3D@21107" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.275776, -0.23140356)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42942" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.231404, -0.275776)
+[node name="@RayCast3D@21108" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.23140356, -0.275776)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42943" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.18, -0.311769)
+[node name="@RayCast3D@21109" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.18, -0.31176916)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42944" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.123127, -0.338289)
+[node name="@RayCast3D@21110" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.12312726, -0.33828935)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42945" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -0.0625133, -0.354531)
+[node name="@RayCast3D@21111" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -0.062513344, -0.3545308)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42946" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, -6.61287e-17, -0.36)
+[node name="@RayCast3D@21112" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, -6.612875e-17, -0.36)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42947" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.0625133, -0.354531)
+[node name="@RayCast3D@21113" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.062513344, -0.3545308)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42948" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.123127, -0.338289)
+[node name="@RayCast3D@21114" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.12312726, -0.33828935)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42949" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.18, -0.311769)
+[node name="@RayCast3D@21115" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.18, -0.31176916)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42950" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.231404, -0.275776)
+[node name="@RayCast3D@21116" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.23140356, -0.275776)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42951" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.275776, -0.231404)
+[node name="@RayCast3D@21117" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.275776, -0.23140356)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42952" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.311769, -0.18)
+[node name="@RayCast3D@21118" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.31176916, -0.18)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42953" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.338289, -0.123127)
+[node name="@RayCast3D@21119" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.33828935, -0.12312726)
 metadata/_edit_lock_ = true
 
-[node name="@RayCast3D@42954" type="RayCast3D" parent="RearWheel"]
-target_position = Vector3(0, 0.354531, -0.0625133)
+[node name="@RayCast3D@21120" type="RayCast3D" parent="RearWheel"]
+target_position = Vector3(0, 0.3545308, -0.062513344)
 metadata/_edit_lock_ = true
 
 [node name="CameraPivot" type="Node3D" parent="."]

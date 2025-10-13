@@ -60,8 +60,13 @@ transform = Transform3D(0.0185453, 0, 0, 0, 4.0355377, 0, 0, 0, 0.048610866, -0.
 size = Vector3(1, 0.6386266, 3.96028)
 material = SubResource("StandardMaterial3D_xlmna")
 
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGTerrain"]
+transform = Transform3D(0.017954588, -0.0046433383, 0, 1.0104253, 3.906996, 0, 0, 0, 0.048610866, 0.12467988, 2.7237718, 0.21327755)
+size = Vector3(7.6047363, 0.699, 5.3584013)
+material = SubResource("StandardMaterial3D_xlmna")
+
 [node name="YtTuesRadial" parent="." instance=ExtResource("3_koiqj")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.2643077, 0.666, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.2643077, 0.6449537, 0)
 
 [node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -0.18818307, 0.6438268, 0.187)
