@@ -74,6 +74,9 @@ func _process(delta: float) -> void:
 	front_brake_input = Input.get_action_strength("FrontBrake")
 	rear_brake_input = Input.get_action_strength("RearBrake")
 	
+	if Input.is_action_just_pressed("AddTorque"):
+		apply_torque(Vector3(0, 0, 100.0))
+	
 	$CameraPivot/Camera3D/Control/Label.text = "Speed: " + str(snapped(linear_velocity.length(), 0.1)) + "\nLean: " + str(snapped(rad_to_deg(-global_rotation.z), 1))
 
 
@@ -96,9 +99,9 @@ func _physics_process(delta: float) -> void:
 	for wheel in wheels:
 		if wheel.is_colliding():
 			var velocity_at_contact = _get_point_velocity(wheel.get_collision_point())
-			var force_vector = wheel.get_forces(pedal_input, steering_output, front_brake_input, rear_brake_input, velocity_at_contact)
+			var impulse_vector = wheel.get_impulse(pedal_input, steering_output, front_brake_input, rear_brake_input, velocity_at_contact, delta)
 			var force_pos_offset := wheel.get_collision_point() - global_position
-			apply_force(force_vector, force_pos_offset)
+			apply_impulse(impulse_vector, force_pos_offset)
 
 
 # Helper function to get velocity at point
@@ -116,9 +119,9 @@ func _get_point_velocity(point: Vector3) -> Vector3:
 func roll_pid(steering_input: float, normal_vector: Vector3) -> float:
 	
 	# PID Constants
-	var Kp := 75.0
+	var Kp := 0.0
 	var Ki := 0.0
-	var Kd := 200.0
+	var Kd := 0.0
 	
 	# Calculate target lean angle and lean angle error
 	var max_lean_angle := 25.0
@@ -130,7 +133,7 @@ func roll_pid(steering_input: float, normal_vector: Vector3) -> float:
 	
 	var torque = (Kp * lean_angle_error) - (Kd * angular_velocity.z) # Not including I right now
 	
-	apply_torque(Vector3(0, 0, torque)) # apply the roll torque
+	shift_center_of_mass(steering_input, 0.2)
 	
 	return 0.0 #get_steering_angle(target_lean_angle)
 
@@ -154,4 +157,10 @@ func get_steering_angle(lean_target: float) -> float:
 	
 		return steering_output
 
+
+# Shifts the center of mass between +/- max_range on the x axis using an input between [-1, 1]
+func shift_center_of_mass(input: float, max_range: float) -> void:
+	const com_origin := Vector3(0, 0.55, 0.0)
+	center_of_mass = com_origin + Vector3(input * max_range, 0, 0)
+	
 #endregion

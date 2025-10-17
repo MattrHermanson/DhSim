@@ -39,40 +39,27 @@ func setup_wheel(settings_dict: Dictionary) -> void:
 
 
 # Returns all forces that are generated from the wheel
-func get_forces(pedal_input: float, steering_input: float, front_brake_input: float, rear_brake_input: float, velocity: Vector3) -> Vector3:
+func get_impulse(pedal_input: float, steering_input: float, front_brake_input: float, rear_brake_input: float, velocity: Vector3, delta: float) -> Vector3:
 	if not is_setup:
 		push_error("Wheel is not setup")
 	
-	var total_force_vector: Vector3
-	var longitudinal_force_vector: Vector3
-	var lateral_force_vector: Vector3
-	
-	# TEMP - TODO figure out getting friction from raycast
+	# TEMP - TOO figure out getting friction from raycast
 	var static_friction = 1.0
-	var kinetic_friction = 0.7
+	var kinetic_fricion = 0.7
 	
 	# Add all wheel forces
-	total_force_vector = get_normal_force(velocity)
+	var impulse_vector := get_normal_impulse(velocity, delta)
+	impulse_vector += get_lateral_impulse(velocity, impulse_vector, delta)
 	
 	# Add rear-only forces
 	if wheel_type == WheelType.REAR:
 		update_animation(velocity, 0.0)
-		longitudinal_force_vector = get_pedal_force(pedal_input)
-		longitudinal_force_vector += get_brake_force(rear_brake_input, velocity)
-		#longitudinal_force_vector += get_rolling_resistance_force(velocity)
-		lateral_force_vector = get_steering_force(velocity)
 	
 	# Add front-only forces
 	if wheel_type == WheelType.FRONT:
 		update_animation(velocity, steering_input)
-		longitudinal_force_vector += get_brake_force(front_brake_input, velocity)
-		#longitudinal_force_vector += get_rolling_resistance_force(velocity)
-		lateral_force_vector += get_steering_force(velocity)
 	
-	#limit total force
-	total_force_vector += apply_friction_circle(longitudinal_force_vector, lateral_force_vector, total_force_vector.length(), static_friction, kinetic_friction)
-	
-	return total_force_vector
+	return impulse_vector
 
 
 # TODO can't steering while in air because this only gets called when contacting the ground
@@ -88,15 +75,16 @@ func update_animation(velocity: Vector3, steering_input: float) -> void:
 	global_basis = neutral_basis.rotated(steering_axis, deg_to_rad(-target_steering_angle))
 
 # TODO make sure this never lets the wheel fall through the ground
-func get_normal_force(velocity: Vector3) -> Vector3:
+func get_normal_impulse(velocity: Vector3, delta: float) -> Vector3:
 	var contact := get_collision_point()
 	var spring_up_direction := global_basis.y
 	var penetration := wheel_radius - global_position.distance_to(contact)
 	var spring_force := spring_strength * penetration
 	var relative_vel := spring_up_direction.dot(velocity)
 	var spring_damp_force := spring_damping * relative_vel
-	var force_vector := (spring_force - spring_damp_force) * get_collision_normal()
-	return force_vector
+	var impulse := (spring_force - spring_damp_force) * get_collision_normal()
+	impulse *= delta
+	return impulse
 
 # TODO change to use slip ratio, wheel speed, etc.
 func get_pedal_force(pedal_input: float) -> Vector3:
@@ -150,10 +138,23 @@ func get_brake_force(brake_input: float, velocity: Vector3) -> Vector3:
 	else: return Vector3(0, 0, 0)
 
 
-# TODO evaluate camber thrust, might not want it idk?
+func get_lateral_impulse(velocity: Vector3, normal_force: Vector3, delta: float) -> Vector3:
+	var side_direction := global_basis.x
+	var ground_normal := get_collision_normal()
+	var perpendicular_direction := side_direction - (side_direction.dot(ground_normal) * ground_normal)
+	
+	var lateral_velocity := perpendicular_direction.dot(velocity)
+	var impulse := 95.0 * -lateral_velocity * perpendicular_direction
+	DebugDraw3D.draw_arrow_ray(get_collision_point(), impulse.normalized(), 0.5, Color.GREEN, 0.1)
+	print(impulse.length() * delta)
+	
+	return impulse * delta
+
+
+# TODO refactor func and var names as lateral force
 func get_steering_force(velocity: Vector3) -> Vector3:
 	var cornering_stiffness := 2500.0 # magic cornering coefficient - N per rad slip angle
-	var camber_stiffness := 0.0#100.0
+	var camber_stiffness := 0.0 #100.0 TODO revaulate this as part of the tire model
 	
 	# get forward and side vectors to calculate slip angle
 	var forward_direction := -global_basis.z
@@ -172,12 +173,12 @@ func get_steering_force(velocity: Vector3) -> Vector3:
 		
 	var camber_thrust := side_direction * camber_stiffness * tan(roll_angle)
 	var steering_force := side_direction * cornering_stiffness * slip_angle
-
+	
 	steering_force += camber_thrust
 	
 	# TODO Remove these debug arrows
-	DebugDraw3D.draw_arrow_ray(global_position, steering_force.normalized(), 0.5, Color.RED, 0.1)
-	DebugDraw3D.draw_arrow_ray(global_position, camber_thrust.normalized(), 0.5, Color.GREEN, 0.1)
+	#DebugDraw3D.draw_arrow_ray(get_collision_point(), steering_force.normalized(), 0.5, Color.RED, 0.1)
+	DebugDraw3D.draw_arrow_ray(get_collision_point(), camber_thrust.normalized(), 0.5, Color.GREEN, 0.1)
 	
 	return steering_force
 
@@ -212,7 +213,7 @@ func apply_friction_circle(longitudinal_force: Vector3, lateral_force: Vector3, 
 	
 	var total_desired := sqrt((longitudinal_force.length() ** 2) + (lateral_force.length() ** 2))
 	
-	if total_desired > max_grip:
+	if false: #total_desired > max_grip
 		
 		# start sliding
 		max_grip = normal_force * kinetic_friction

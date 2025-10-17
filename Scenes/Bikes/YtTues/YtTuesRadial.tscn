@@ -71,9 +71,16 @@ script = ExtResource("1_32fpy")
 front_wheel = NodePath("FrontWheel")
 f_spring_strength = 25000.0
 f_spring_damping = 1500.0
+f_wheel_radius = null
+f_brake_force = null
+f_head_tube_angle = null
+f_max_steering_angle = null
 rear_wheel = NodePath("RearWheel")
 r_spring_strength = 25000.0
 r_spring_damping = 1500.0
+r_wheel_radius = null
+r_pedal_force = null
+r_brake_force = null
 metadata/_custom_type_script = "uid://dvfnwadc3j73x"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

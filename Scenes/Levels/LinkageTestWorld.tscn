@@ -8,13 +8,13 @@
 panorama = ExtResource("1_koiqj")
 energy_multiplier = 0.75
 
-[sub_resource type="Sky" id="Sky_sr1yi"]
+[sub_resource type="Sky" id="Sky_koiqj"]
 sky_material = SubResource("PanoramaSkyMaterial_w6hgi")
 
 [sub_resource type="Environment" id="Environment_w6hgi"]
 background_mode = 2
 background_color = Color(0.743998, 0.839718, 0.968982, 1)
-sky = SubResource("Sky_sr1yi")
+sky = SubResource("Sky_koiqj")
 tonemap_mode = 2
 ssao_enabled = true
 
