@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://nb23q4meltmg"]
+[gd_scene load_steps=17 format=4 uid="uid://nb23q4meltmg"]
 
 [ext_resource type="Script" uid="uid://dtp80n107wfv7" path="res://Scenes/Bikes/BikeBase/Scripts/bike_base.gd" id="1_hkuws"]
 [ext_resource type="ArrayMesh" uid="uid://cvpf6v1lbg040" path="res://Scenes/Bikes/YtTues/Meshes/Frame_BSurfaceMesh_003.res" id="2_hkuws"]
@@ -6,7 +6,8 @@
 [ext_resource type="ArrayMesh" uid="uid://b2bft80ugrtsw" path="res://Scenes/Bikes/YtTues/Meshes/Frame_Circle_019.res" id="4_0bcar"]
 [ext_resource type="ArrayMesh" uid="uid://cenjfmpvpsuuh" path="res://Scenes/Bikes/YtTues/Meshes/Frame_Circle_003.res" id="5_2gjx0"]
 [ext_resource type="ArrayMesh" uid="uid://yioym7rqg7uk" path="res://Scenes/Bikes/YtTues/Meshes/Frame_Cylinder_004.res" id="6_2373t"]
-[ext_resource type="Script" uid="uid://c01j1xgjnmiya" path="res://Scenes/Bikes/BikeBase/Scripts/bike_radial_wheel_base.gd" id="7_1wgyg"]
+[ext_resource type="Script" uid="uid://coh6ii05otuoc" path="res://Scenes/CustomNodes/Scripts/pivot.gd" id="7_ljddd"]
+[ext_resource type="Script" path="res://Scenes/Bikes/BikeBase/Scripts/bike_rigid_wheel_base.gd" id="8_hkuws"]
 [ext_resource type="ArrayMesh" uid="uid://43u5skivus1a" path="res://Scenes/Bikes/YtTues/Meshes/FrontWheel_Circle_001.res" id="8_swuwg"]
 [ext_resource type="ArrayMesh" uid="uid://c76ruvi6me6iu" path="res://Scenes/Bikes/YtTues/Meshes/RearWheel_Circle_004.res" id="9_4yf2a"]
 
@@ -53,27 +54,23 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_2d536")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_np068"]
-size = Vector3(0.186325, 0.25733948, 0.7381592)
+size = Vector3(0.186325, 0.25733948, 0.70025635)
 
-[sub_resource type="LabelSettings" id="LabelSettings_ljddd"]
+[sub_resource type="LabelSettings" id="LabelSettings_hkuws"]
 font_size = 32
 font_color = Color(1, 0.145098, 1, 1)
 
-[node name="YtTues" type="RigidBody3D" node_paths=PackedStringArray("front_suspension_bar", "front_wheel", "rear_suspension_bar", "rear_wheel")]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hkuws"]
+height = 0.07373047
+radius = 0.3618164
+
+[node name="YtTues" type="RigidBody3D"]
 collision_layer = 2
 mass = 95.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0.35, 0)
 inertia = Vector3(43, 48, 48)
 script = ExtResource("1_hkuws")
-front_suspension_bar = NodePath("SuspensionBarFront")
-front_wheel = NodePath("SuspensionBarFront/FrontWheel")
-f_spring_strength = 25000.0
-f_spring_damping = 1500.0
-rear_suspension_bar = NodePath("SuspensionBarRear")
-rear_wheel = NodePath("SuspensionBarRear/RearWheel")
-r_spring_strength = 25000.0
-r_spring_damping = 1500.0
 metadata/_custom_type_script = "uid://dvfnwadc3j73x"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -101,418 +98,64 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0.464409, 0.885621, 2.03e-08, -0.885
 mesh = ExtResource("6_2373t")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.6139822, -0.7893199, 0, 0.7893199, 0.6139822, -0.00221128, 0.19132376, -0.2022433)
+transform = Transform3D(1, 0, 0, 0, 0.6139822, -0.7893199, 0, 0.7893199, 0.6139822, -0.00221128, 0.20628248, -0.21387914)
 shape = SubResource("BoxShape3D_np068")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.552, 1.335)
+[node name="CameraPivot" type="Node3D" parent="."]
+script = ExtResource("7_ljddd")
+metadata/_custom_type_script = "uid://coh6ii05otuoc"
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881898, 0, -0.25881898, 0.9659259, 0, 0.552, 1.335)
 fov = 90.0
 
-[node name="Control" type="Control" parent="Camera3D"]
+[node name="Control" type="Control" parent="CameraPivot/Camera3D"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="Camera3D/Control"]
+[node name="Label" type="Label" parent="CameraPivot/Camera3D/Control"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "test"
-label_settings = SubResource("LabelSettings_ljddd")
+label_settings = SubResource("LabelSettings_hkuws")
+metadata/_edit_use_anchors_ = true
 
-[node name="SuspensionBarFront" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.018592885, -0.72047526)
+[node name="RearWheel" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15643317, 0.45732927)
+mass = 2.5
+script = ExtResource("8_hkuws")
+metadata/_custom_type_script = "uid://bur3xs2e5j6cl"
 
-[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="SuspensionBarFront"]
-transform = Transform3D(1, 0, 0, 0, 0.8926645, -0.45072174, 0, 0.45072174, 0.8926645, 0, 0.34919345, 0.18670185)
+[node name="RearJoint" type="Generic6DOFJoint3D" parent="RearWheel"]
 node_a = NodePath("../..")
 node_b = NodePath("..")
-linear_spring_y/enabled = true
-linear_spring_y/stiffness = 50000.0
-linear_spring_y/damping = 750.0
 
-[node name="FrontWheel" type="Node3D" parent="SuspensionBarFront"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13372512, -0.10706973)
-script = ExtResource("7_1wgyg")
-raycast_resolution = 36
-raycast_length = 0.36
-metadata/_custom_type_script = "uid://c01j1xgjnmiya"
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SuspensionBarFront/FrontWheel"]
-mesh = ExtResource("8_swuwg")
-skeleton = NodePath("")
-
-[node name="@RayCast3D@43622" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.36, 0)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43623" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.354531, 0.0625133)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43624" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.338289, 0.123127)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43625" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.311769, 0.18)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43626" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.275776, 0.231404)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43627" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.231404, 0.275776)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43628" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.18, 0.311769)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43629" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.123127, 0.338289)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43630" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.0625133, 0.354531)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43631" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 2.20429e-17, 0.36)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43632" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.0625133, 0.354531)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43633" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.123127, 0.338289)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43634" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.18, 0.311769)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43635" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.231404, 0.275776)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43636" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.275776, 0.231404)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43637" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.311769, 0.18)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43638" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.338289, 0.123127)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43639" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.354531, 0.0625133)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43640" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.36, 4.40858e-17)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43641" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.354531, -0.0625133)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43642" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.338289, -0.123127)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43643" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.311769, -0.18)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43644" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.275776, -0.231404)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43645" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.231404, -0.275776)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43646" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.18, -0.311769)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43647" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.123127, -0.338289)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43648" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -0.0625133, -0.354531)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43649" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, -6.61287e-17, -0.36)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43650" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.0625133, -0.354531)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43651" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.123127, -0.338289)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43652" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.18, -0.311769)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43653" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.231404, -0.275776)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43654" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.275776, -0.231404)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43655" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.311769, -0.18)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43656" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.338289, -0.123127)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@43657" type="RayCast3D" parent="SuspensionBarFront/FrontWheel"]
-target_position = Vector3(0, 0.354531, -0.0625133)
-metadata/_edit_lock_ = true
-
-[node name="CSGBox3D" type="CSGBox3D" parent="SuspensionBarFront"]
-transform = Transform3D(1, 0, 0, 0, 0.88318515, -0.4690246, 0, 0.4690246, 0.88318515, 0, -0.006, -0.001)
-size = Vector3(0.05, 0.38809863, 0.03866406)
-
-[node name="SuspensionBarRear" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.072253056, 0.22261754)
-
-[node name="RearWheel" type="Node3D" parent="SuspensionBarRear"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07974694, 0.23438245)
-script = ExtResource("7_1wgyg")
-raycast_resolution = 36
-raycast_length = 0.36
-metadata/_custom_type_script = "uid://c01j1xgjnmiya"
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="SuspensionBarRear/RearWheel"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="RearWheel"]
 mesh = ExtResource("9_4yf2a")
 skeleton = NodePath("")
 
-[node name="@RayCast3D@42919" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.36, 0)
-metadata/_edit_lock_ = true
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RearWheel"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_hkuws")
 
-[node name="@RayCast3D@42920" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.354531, 0.0625133)
-metadata/_edit_lock_ = true
+[node name="FrontWheel" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15093182, -0.8269522)
+mass = 2.5
+script = ExtResource("8_hkuws")
+metadata/_custom_type_script = "uid://bur3xs2e5j6cl"
 
-[node name="@RayCast3D@42921" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.338289, 0.123127)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42922" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.311769, 0.18)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42923" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.275776, 0.231404)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42924" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.231404, 0.275776)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42925" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.18, 0.311769)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42926" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.123127, 0.338289)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42927" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.0625133, 0.354531)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42928" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 2.20429e-17, 0.36)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42929" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.0625133, 0.354531)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42930" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.123127, 0.338289)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42931" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.18, 0.311769)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42932" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.231404, 0.275776)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42933" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.275776, 0.231404)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42934" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.311769, 0.18)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42935" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.338289, 0.123127)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42936" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.354531, 0.0625133)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42937" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.36, 4.40858e-17)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42938" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.354531, -0.0625133)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42939" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.338289, -0.123127)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42940" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.311769, -0.18)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42941" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.275776, -0.231404)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42942" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.231404, -0.275776)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42943" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.18, -0.311769)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42944" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.123127, -0.338289)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42945" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -0.0625133, -0.354531)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42946" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, -6.61287e-17, -0.36)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42947" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.0625133, -0.354531)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42948" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.123127, -0.338289)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42949" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.18, -0.311769)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42950" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.231404, -0.275776)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42951" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.275776, -0.231404)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42952" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.311769, -0.18)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42953" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.338289, -0.123127)
-metadata/_edit_lock_ = true
-
-[node name="@RayCast3D@42954" type="RayCast3D" parent="SuspensionBarRear/RearWheel"]
-target_position = Vector3(0, 0.354531, -0.0625133)
-metadata/_edit_lock_ = true
-
-[node name="ShockTop" type="Generic6DOFJoint3D" parent="SuspensionBarRear"]
-transform = Transform3D(1, 0, 0, 0, 0.79612875, 0.6051273, 0, -0.6051273, 0.79612875, 0, 0.21206096, -0.41304412)
+[node name="FrontJoint" type="Generic6DOFJoint3D" parent="FrontWheel"]
 node_a = NodePath("../..")
-node_b = NodePath("../Shock")
-linear_spring_y/enabled = true
-linear_spring_y/stiffness = 500000.0
-linear_spring_y/damping = 50000.0
-angular_limit_x/enabled = false
-
-[node name="CSGBox3D" type="CSGBox3D" parent="SuspensionBarRear"]
-transform = Transform3D(1, 0, 0, 0, 0.3079877, 0.9513903, 0, -0.9513903, 0.3079877, 0, -0.0025822818, 0.0043367594)
-size = Vector3(0.05, 0.50127643, 0.036421873)
-
-[node name="RigidBody3D" type="RigidBody3D" parent="SuspensionBarRear"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07010002, -0.29438528)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="SuspensionBarRear/RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.02315841, 0.99973184, 0, -0.99973184, 0.02315841, 0, -0.0022859434, -0.0025473908)
-size = Vector3(0.05, 0.15137084, 0.031566404)
-
-[node name="RigidBody3D2" type="RigidBody3D" parent="SuspensionBarRear"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.114343144, -0.028844565)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="SuspensionBarRear/RigidBody3D2"]
-transform = Transform3D(1, 0, 0, 0, -0.071532205, -0.99743825, 0, 0.99743825, -0.071532205, 0, -0.004662618, 0.04419799)
-size = Vector3(0.05, 0.30229652, 0.03105078)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="SuspensionBarRear/RigidBody3D2/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 0.6945351, -0.7194654, 0, 0.7194654, 0.6945351, 0, -0.16731876, -0.030636936)
-size = Vector3(0.05, 0.11519531, 0.033171877)
-
-[node name="Shock" type="RigidBody3D" parent="SuspensionBarRear"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08018227, -0.30595857)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="SuspensionBarRear/Shock"]
-transform = Transform3D(1, 0, 0, 0, 0.80218226, 0.5970793, 0, -0.5970793, 0.80218226, 0, -0.0063850917, 0.004297182)
-size = Vector3(0.05, 0.104975164, 0.04383447)
-
-[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="SuspensionBarRear"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.042728692, -0.1846302)
-node_a = NodePath("../..")
-node_b = NodePath("../RigidBody3D2")
-angular_limit_x/enabled = false
-
-[node name="Generic6DOFJoint3D2" type="Generic6DOFJoint3D" parent="SuspensionBarRear"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12924114, 0.15614438)
-node_a = NodePath("../RigidBody3D2")
 node_b = NodePath("..")
-angular_limit_x/enabled = false
 
-[node name="Generic6DOFJoint3D3" type="Generic6DOFJoint3D" parent="SuspensionBarRear"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.064356804, -0.22946896)
-node_a = NodePath("..")
-node_b = NodePath("../RigidBody3D")
-angular_limit_x/enabled = false
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="FrontWheel"]
+mesh = ExtResource("8_swuwg")
+skeleton = NodePath("")
 
-[node name="Generic6DOFJoint3D4" type="Generic6DOFJoint3D" parent="SuspensionBarRear"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.066994384, -0.36451277)
-node_a = NodePath("../..")
-node_b = NodePath("../RigidBody3D")
-angular_limit_x/enabled = false
-
-[node name="Generic6DOFJoint3D5" type="Generic6DOFJoint3D" parent="SuspensionBarRear"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.004747629, -0.25162458)
-node_a = NodePath("../Shock")
-node_b = NodePath("..")
-angular_limit_x/enabled = false
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrontWheel"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.00024414063, 0, 0)
+shape = SubResource("CylinderShape3D_hkuws")
