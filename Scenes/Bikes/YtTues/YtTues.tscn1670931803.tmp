@@ -64,12 +64,14 @@ font_size = 32
 font_color = Color(1, 0.145098, 1, 1)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sr646"]
+friction = 0.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hkuws"]
 height = 0.07373047
 radius = 0.3618164
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0bcar"]
+friction = 0.0
 
 [node name="YtTues" type="RigidBody3D"]
 collision_layer = 2
@@ -136,8 +138,6 @@ metadata/_edit_use_anchors_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15643317, 0.45732927)
 mass = 2.5
 physics_material_override = SubResource("PhysicsMaterial_sr646")
-contact_monitor = true
-max_contacts_reported = 16
 script = ExtResource("8_hkuws")
 wheel_type = 1
 metadata/_custom_type_script = "uid://bur3xs2e5j6cl"
@@ -159,8 +159,6 @@ shape = SubResource("CylinderShape3D_hkuws")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15093182, -0.8269522)
 mass = 2.5
 physics_material_override = SubResource("PhysicsMaterial_0bcar")
-contact_monitor = true
-max_contacts_reported = 16
 script = ExtResource("8_hkuws")
 metadata/_custom_type_script = "uid://bur3xs2e5j6cl"
 

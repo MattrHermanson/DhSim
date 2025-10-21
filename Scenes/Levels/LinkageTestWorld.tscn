@@ -69,7 +69,5 @@ material = SubResource("StandardMaterial3D_xlmna")
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.7322806, 0.670004, 0.17616856)
 
 [node name="Camera3D2" type="Camera3D" parent="."]
-transform = Transform3D(-4.3711395e-08, 0, 1, 0, 1, 0, -1, 0, -4.3711395e-08, -0.18818307, 0.6438268, 0.187)
-visible = false
-projection = 1
+transform = Transform3D(-4.2742997e-08, -0.1484308, 0.9889228, -1.2976234e-08, 0.9889228, 0.1484308, -1, -6.4881163e-09, -4.4195595e-08, -0.08048278, 1.0280013, 0.36223912)
 size = 1.52
